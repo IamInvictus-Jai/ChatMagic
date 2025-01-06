@@ -256,7 +256,7 @@ document.querySelector(".back-button").addEventListener("click", function () {
   this.style.transform = "translateX(-.8rem)";
   setTimeout(() => {
     this.style.transform = "translateX(0)";
-    window.location.href = `${window.location.origin}/chat-magic/join-chat-room`;
+    window.location.href = `${window.location.origin}`;
   }, 200);
 });
 
