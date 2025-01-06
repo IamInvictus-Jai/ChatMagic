@@ -10,9 +10,9 @@
     <title>Chat Page</title>
 
     <!-- Attach CSS Files -->
-    <!-- {% load static %} -->
+    {% load static %}
      <link rel="stylesheet" href="{%  static 'css/chat.css' %}?v={{ timestamp }}">
-    <!-- <link rel="stylesheet" href="/static/css/chat.css" /> -->
+    
   </head>
   <body>
     <div class="chat-container">
@@ -29,9 +29,6 @@
           </svg>
         </button>
         <div class="profile-info">
-          <!-- <div class="profile-pic"
-              style="background: url('/static/images/chat/{{profile_pic}}.jpeg') center/cover;">
-          </div> -->
           <div class="user-details">
             <span class="username">{{room_name}}</span>
             <span class="status">Online</span>
@@ -66,34 +63,11 @@
         <input type="hidden" class="room-id" value="{{roomID}}">
       </div>
 
-      <div class="chat-messages">
-        <!-- <div class="user">
-            <div class="profile-pic message user"
-              style="background: #969696 url('/static/images/chat/user.png') center/cover;">
-            </div>
-            <div class="message sent">
-              Hey there how are you ?<br>
-              Hope you are fine
-              <p class="message-user-id sent">YOU</p>
-            </div>
-          </div> -->
-      </div>
+      <div class="chat-messages"></div>
 
       <div class="check-group-members">
         Active Members
-        <div class="members">
-          <!-- <div class="member">Admin</div>
-          <div class="member">User1</div>
-          <div class="member">User2</div>
-          <div class="member">User3</div>
-          <div class="member">User4</div>
-          <div class="member">User5</div>
-          <div class="member">User6</div>
-          <div class="member">User7</div>
-          <div class="member">User8</div>
-          <div class="member">User9</div>
-          <div class="member">User10</div> -->
-        </div>        
+        <div class="members"></div>        
       </div>
 
       <div class="chat-menu">
@@ -161,11 +135,10 @@
           </svg>
         </button>
       </div>
-      <!-- {% csrf_token %} -->
+      {% csrf_token %}
     </div>
+    {% load static %}
     <script src="{% static 'js/chat.js' %}?v={{ timestamp }}"></script>
     <script src="{% static 'js/listener.js' %}?v={{ timestamp }}"></script>
-    <!-- <script src="/static/js/chat.js"></script>
-    <script src="/static/js/listener.js"></script> -->
   </body>
 </html>
