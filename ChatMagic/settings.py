@@ -28,13 +28,18 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["chatmagic-0gn4.onrender.com"]
+ALLOWED_HOSTS = [
+    "chatmagic-0gn4.onrender.com",
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'channels',
+    'channels_redis',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,12 +81,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ChatMagic.wsgi.application'
 ASGI_APPLICATION = 'ChatMagic.asgi.application'
 
-# Add Channel Layers
+
+# Replace the CHANNEL_LAYERS configuration
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
     },
 }
+
+# settings for WebSocket
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+SECURE_SSL_REDIRECT = True
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
