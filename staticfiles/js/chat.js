@@ -14,7 +14,7 @@ document.querySelector(".chat-menu-btn").style.opacity = "0.7";
 let userID = document.querySelector(".user-id").value.trim();
 let roomID = document.querySelector(".room-id").value.trim();
 const timestamp = new Date().getTime();
-let url = `ws://${window.location.host}/ws/chat/${roomID}/${userID}/?&_=${timestamp}`;
+let url = `wss://${window.location.host}/ws/chat/${roomID}/${userID}/?&_=${timestamp}`;
 console.log(url);
 const chatSocket = new WebSocket(url);
 
