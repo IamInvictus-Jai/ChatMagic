@@ -14,6 +14,8 @@ from pathlib import Path
 from os import path
 import os
 from dotenv import load_dotenv
+from urllib.parse import urlparse
+
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['SECRET_KEY']
+
+# Get Redis URL from environment variable
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -82,12 +87,18 @@ WSGI_APPLICATION = 'ChatMagic.wsgi.application'
 ASGI_APPLICATION = 'ChatMagic.asgi.application'
 
 
-# Replace the CHANNEL_LAYERS configuration
+# Parse the URL to add SSL configuration
+url = urlparse(REDIS_URL)
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+            "hosts": [{
+                "address": (url.hostname, url.port or 6379),
+                "password": url.password,
+                "ssl": True,  # Enable SSL
+                "ssl_cert_reqs": None,  # Don't verify SSL cert
+            }],
         },
     },
 }
