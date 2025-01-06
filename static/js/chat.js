@@ -13,9 +13,11 @@ document.querySelector(".chat-menu-btn").style.opacity = "0.7";
 
 let userID = document.querySelector(".user-id").value.trim();
 let roomID = document.querySelector(".room-id").value.trim();
+
+const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+const host = window.location.host;
 const timestamp = new Date().getTime();
-let url = `ws://${window.location.host}/ws/chat/${roomID}/${userID}/?&_=${timestamp}`;
-console.log(url);
+let url = `${protocol}//${host}/ws/chat/${roomID}/${userID}/?_=${timestamp}`;
 const chatSocket = new WebSocket(url);
 
 
