@@ -71,6 +71,7 @@ TEMPLATES = [
     },
 ]
 
+WSGI_APPLICATION = 'ChatMagic.wsgi.application'
 ASGI_APPLICATION = 'ChatMagic.asgi.application'
 
 # Add Channel Layers
