@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_)zvp3r#^mhom$7c2p2^ll3&$%u5y8uw0i0rwg&km6m+-ixb-y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["chatmagic-0gn4.onrender.com"]
 
 
 # Application definition
